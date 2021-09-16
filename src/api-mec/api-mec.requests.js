@@ -1,6 +1,8 @@
+import { APIURL } from '../env';
+
 export const handleGetProductDetails = async (productId) => {
     try {
-        const res = await fetch(`http://localhost:3000/product/${productId}`, 
+        const res = await fetch(`${APIURL}/product/${productId}`, 
         { Method: 'GET' });
         const data = await res.json();
         return data;
@@ -10,7 +12,7 @@ export const handleGetProductDetails = async (productId) => {
 }
 export const handleGetOrderDetails = async (orderId) => {
     try { 
-        const res = await fetch(`http://localhost:3000/order/${orderId}`, 
+        const res = await fetch(`${APIURL}/order/${orderId}`, 
         { Method: 'GET' });
         const data = await res.json();
         console.log(data);
@@ -21,7 +23,7 @@ export const handleGetOrderDetails = async (orderId) => {
 }
 export const handlePostOrder = async (productId, quantity) => {
     try {
-        const res = await fetch('http://localhost:3000/order', {
+        const res = await fetch(`${APIURL}/order`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -38,7 +40,7 @@ export const handlePostOrder = async (productId, quantity) => {
 
 export const handleGetProducts = async () => {
     try {
-        const res = await fetch('http://localhost:3000/products', {Method: 'GET'});
+        const res = await fetch(`${APIURL}/products`, {Method: 'GET'});
         const data = await res.json();
         return data;
     } catch(err){
