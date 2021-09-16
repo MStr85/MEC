@@ -1,0 +1,4 @@
+export const RouterActionTypes = {
+	SET_ROUTER: 'SET_ROUTER',
+    SET_SELECTED_PRODUCT: 'SET_SELECTED_PRODUCT'
+};

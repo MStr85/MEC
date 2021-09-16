@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setProducts } from './redux/products/products.actions';
+
+import Header from './components/header/header.component';
+import ProductsList from './components/products-list/products-list.component.js';
+import Orders from './components/orders/orders.component';
+import ProductPage from './components/product-page/product-page.component';
+
+import { handleGetProducts } from './api-mec/api-mec.requests';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = ({router, setProducts}) => {
+
+  useEffect(() => {
+      const getProductInteval = setInterval(() => {
+        handleGetProducts().then(data => setProducts(data))
+      }, 2000);
+      return () => clearInterval(getProductInteval);
+    }
   );
+  
+    return ( 
+      <div className = 'App'>
+        <Header />
+        {(router === "products") ? <ProductsList /> : ''}
+        {(router === "orders") ? <Orders /> : ''}
+        {(router === "product") ? <ProductPage /> : ''}
+      </div>
+    );
+  
 }
 
-export default App;
+const mapStateToProps = state => ({
+  products: state.products.products,
+  router: state.router.router
+});
+
+const mapDispatchToProps = dispatch => ({
+  setProducts: products => dispatch(setProducts(products))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

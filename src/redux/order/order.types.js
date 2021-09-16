@@ -1,0 +1,5 @@
+export const OrderActionTypes = {
+	SET_ORDER: 'SET_ORDER',
+	SET_ORDER_ID: 'SET_ORDER_ID',
+	SET_ORDER_QUANTITY: 'SET_ORDER_QUANTITY'
+};
